@@ -7,35 +7,40 @@
  * @lint-ignore-every XPLATJSCOPYRIGHT1
  */
 
-import React, {Component} from 'react';
-import { StyleSheet, Text, TextInput, View} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 
 type Props = {};
 export default class App extends Component<Props> {
 
-  constructor(){
+  constructor() {
     super()
     this.state = {
-      value: "Edit me"
+      value: ""
     }
-    this.handleTextChange = this.handleTextChange.bind(this)
+    this.buttonPress = this.buttonPress.bind(this)
 
   }
 
-  handleTextChange(text){
-    this.setState({
-      value: text
-    })
+  buttonPress() {
+    console.log(this.state.username, this.state.password)
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <Text>Username</Text>
         <TextInput
           defaultValue={this.state.value}
-          onChangeText={this.handleTextChange}
-          />
-          <Text>You are writing {this.state.value}</Text>
+          onChangeText={text => this.setState({ username: text })}
+        />
+        <Text>Password</Text>
+        <TextInput
+          defaultValue={this.state.value}
+          onChangeText={text => this.setState({ password: text })}
+        />
+
+        <Button title={"Login"} onPress={this.buttonPress} />
       </View>
     );
   }
@@ -44,6 +49,8 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    padding: 20
   }
 
 });
