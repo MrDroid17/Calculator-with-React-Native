@@ -8,39 +8,60 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { StyleSheet, View, Button, Text } from 'react-native';
 
 type Props = {};
 export default class App extends Component<Props> {
 
   constructor() {
     super()
-    this.state = {
-      value: ""
-    }
-    this.buttonPress = this.buttonPress.bind(this)
-
+    this.state = {}
   }
 
-  buttonPress() {
-    console.log(this.state.username, this.state.password)
-  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Username</Text>
-        <TextInput
-          defaultValue={this.state.value}
-          onChangeText={text => this.setState({ username: text })}
-        />
-        <Text>Password</Text>
-        <TextInput
-          defaultValue={this.state.value}
-          onChangeText={text => this.setState({ password: text })}
-        />
+        <View style={styles.calculation}>
+        <Text style={styles.calculationText}>14*14</Text>
+        </View>
+        <View style={styles.result}>
+        <Text style={styles.resultText}>196</Text>
+        
+        </View>
+        <View style={styles.button}>
 
-        <Button title={"Login"} onPress={this.buttonPress} />
+          <View style={styles.number}>
+            <View style={styles.numberRow}>
+              <Button title={"0"} />
+              <Button title={"0"} />
+              <Button title={"0"} />
+            </View>
+            <View style={styles.numberRow}>
+              <Button title={"0"} />
+              <Button title={"0"} />
+              <Button title={"0"} />
+            </View>
+            <View style={styles.numberRow}>
+              <Button title={"0"} />
+              <Button title={"0"} />
+              <Button title={"0"} />
+            </View>
+            <View style={styles.numberRow}>
+              <Button title={"0"} />
+              <Button title={"0"} />
+              <Button title={"0"} />
+            </View>
+          </View>
+
+          <View style={styles.operation}>
+            <Button title={"+"} />
+            <Button title={"+"} />
+            <Button title={"+"} />
+            <Button title={"+"} />
+          </View>
+        </View>
+
       </View>
     );
   }
@@ -48,9 +69,49 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1
+  },
+  calculation: {
+    flex: 2,
+    backgroundColor: 'red',
+    justifyContent: "space-around",
+    alignItems: "flex-end",
+  },
+  result: {
     flex: 1,
-    justifyContent: "center",
-    padding: 20
+    backgroundColor: 'orange',
+    justifyContent: "space-around",
+    alignItems: "flex-end",
+  },
+  calculationText: {
+    fontSize: 28,
+    color: 'white',
+    marginRight: 10
+  },
+  resultText: {
+    fontSize: 20,
+    color: 'white',
+    marginRight: 10
+  },
+  button: {
+    flex: 6,
+    flexDirection: 'row'
+  },
+  number: {
+    flex: 3,
+    backgroundColor: 'yellow'
+  },
+  operation: {
+    flex: 1,
+    backgroundColor: 'cyan',
+    justifyContent: 'space-around',
+    alignItems:'center'
+  },
+  numberRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
   }
 
 });
