@@ -12,7 +12,7 @@ import { StyleSheet, View, Button, Text, TouchableOpacity } from 'react-native';
 
 type Props = {};
 export default class App extends Component<Props> {
-  
+
   constructor() {
     super()
     this.state = {
@@ -34,12 +34,25 @@ export default class App extends Component<Props> {
     })
   }
 
+  validate() {
+    const text = this.state.calculationText;
+    switch (text.slice(-1)) {
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+        return false;
+    }
+    return true;
+
+  }
+
   onButtonPresses(text) {
     console.log(text);
 
     // when = is pressed dont print the symbol instead perform corresponding operation
     if (text == '=') {
-      return this.result();
+      return this.validate() && this.result();
     }
     this.setState({
       calculationText: this.state.calculationText + text
@@ -61,15 +74,15 @@ export default class App extends Component<Props> {
       case '*':
       case '/':
 
-      const lastCharacter = this.state.calculationText.split('').pop();
+        const lastCharacter = this.state.calculationText.split('').pop();
 
-      if(this.operations.indexOf(lastCharacter) > 0) return
+        if (this.operations.indexOf(lastCharacter) > 0) return
 
-      if(this.state.text == '') return
+        if (this.state.text == '') return
 
-      this.setState({
-        calculationText: this.state.calculationText + operation
-      })
+        this.setState({
+          calculationText: this.state.calculationText + operation
+        })
 
     }
   }
