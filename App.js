@@ -15,7 +15,37 @@ export default class App extends Component<Props> {
 
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      calculationText: ''
+    }
+  }
+
+  result(){
+    const text = this.state.calculationText
+  }
+
+  onButtonPresses(text){
+    console.log(text);
+
+    // when = is pressed dont print the symbol instead perform corresponding operation
+    if(text == '='){
+      return this.result();
+    }
+    this.setState({
+      calculationText: this.state.calculationText + text
+    })
+  }
+
+  operate(operation){
+    switch(operation){
+      case 'DEL':
+      console.log(this.state.calculationText);
+      let text = this.state.calculationText.split('');
+      text.pop()
+      this.setState({
+        calculationText: text.join('')
+      })
+    }
   }
 
 
@@ -26,12 +56,12 @@ export default class App extends Component<Props> {
      * for one button
      */
     let rows = [];
-    let elements = [[1, 2, 3], [4, 5, 6], [7, 8, 9], ['←', 0, '=']]
+    let elements = [[1, 2, 3], [4, 5, 6], [7, 8, 9], ['.', 0, '=']]
     for (let i = 0; i < 4; i++) {
       let row = [];
       for (let j = 0; j < 3; j++) {
         row.push(
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity onPress={() => this.onButtonPresses(elements[i][j])} style={styles.btn}>
             <Text style={styles.btnText}>{elements[i][j]}</Text>
           </TouchableOpacity>
         )
@@ -43,11 +73,11 @@ export default class App extends Component<Props> {
     /**
      * Common operation button design
      */
-    let operations = ['+', '-', '*', '/']
+    let operations = ['DEL', '+', '-', '*', '/']
     let actions = []
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
       actions.push(
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={()=> this.operate(operations[i])}>
           <Text style={[styles.btnText, styles.textWhite]}>
             {operations[i]}
           </Text>
@@ -59,7 +89,7 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <View style={styles.calculation}>
-          <Text style={styles.calculationText}>14*14</Text>
+          <Text style={styles.calculationText}>{this.state.calculationText}</Text>
         </View>
         <View style={styles.result}>
           <Text style={styles.resultText}>196</Text>
