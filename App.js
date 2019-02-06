@@ -100,7 +100,7 @@ export default class App extends Component<Props> {
       let row = [];
       for (let j = 0; j < 3; j++) {
         row.push(
-          <TouchableOpacity onPress={() => this.onButtonPresses(elements[i][j])} style={styles.btn}>
+          <TouchableOpacity key={elements[i][j]} onPress={() => this.onButtonPresses(elements[i][j])} style={styles.btn}>
             <Text style={styles.btnText}>{elements[i][j]}</Text>
           </TouchableOpacity>
         )
@@ -115,7 +115,7 @@ export default class App extends Component<Props> {
     let actions = []
     for (let i = 0; i < 5; i++) {
       actions.push(
-        <TouchableOpacity style={styles.btn} onPress={() => this.operate(this.operations[i])}>
+        <TouchableOpacity key={this.operations[i]} style={styles.btn} onPress={() => this.operate(this.operations[i])}>
           <Text style={[styles.btnText, styles.textWhite]}>
             {this.operations[i]}
           </Text>
@@ -154,24 +154,24 @@ const styles = StyleSheet.create({
   },
   calculation: {
     flex: 2,
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     justifyContent: "space-around",
     alignItems: "flex-end",
   },
   result: {
     flex: 1,
-    backgroundColor: 'orange',
+    backgroundColor: '#ededed',
     justifyContent: "space-around",
     alignItems: "flex-end",
   },
   calculationText: {
     fontSize: 28,
-    color: 'white',
+    color: 'black',
     marginRight: 10
   },
   resultText: {
     fontSize: 20,
-    color: 'white',
+    color: 'black',
     marginRight: 10
   },
   button: {
@@ -180,13 +180,13 @@ const styles = StyleSheet.create({
   },
   number: {
     flex: 3,
-    backgroundColor: 'yellow'
+    backgroundColor: '#434343'
   },
   operation: {
     flex: 1,
-    backgroundColor: 'gray',
+    backgroundColor: '#636363',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'stretch'
   },
   numberRow: {
     flex: 1,
@@ -201,7 +201,8 @@ const styles = StyleSheet.create({
 
   },
   btnText: {
-    fontSize: 28
+    fontSize: 28,
+    color: 'white'
   },
   textWhite: {
     color: 'white'
