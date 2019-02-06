@@ -16,13 +16,22 @@ export default class App extends Component<Props> {
   constructor() {
     super()
     this.state = {
-      calculationText: ''
+      calculationText: '',
+      resultText: ''
     }
     this.operations = ['D', '+', '-', '*', '/'];
   }
 
   result() {
-    const text = this.state.calculationText
+    const text = this.state.calculationText;
+    this.setState({
+      /**
+       * Caution: eval is a infamous js function which should never be used in a production level app
+       * Here i am using it anyway
+       * 
+       */
+      resultText: eval(text)
+    })
   }
 
   onButtonPresses(text) {
@@ -108,7 +117,7 @@ export default class App extends Component<Props> {
           <Text style={styles.calculationText}>{this.state.calculationText}</Text>
         </View>
         <View style={styles.result}>
-          <Text style={styles.resultText}>196</Text>
+          <Text style={styles.resultText}>{this.state.resultText}</Text>
         </View>
         <View style={styles.button}>
 
